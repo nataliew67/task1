@@ -1,0 +1,43 @@
+fun main() {
+// ЗАДАЧА 4
+// Создать приложение, с помощью которого пользователь,
+// введя два числа и символ операции, узнает результат.
+// Символами операции могут быть: / — деление, * — умножение,
+// + — сложение, - — вычитание. Числа могут быть вещественными.
+// Числа и знак операции разделяются между собой одним пробелом.
+// Ввод производится в формате - ЧИСЛО1 ЧИСЛО2 ОПЕРАЦИЯ
+print("Введите математический пример: ")
+println("Результат: " + task4(readln()))
+}
+
+fun task4(string: String): Float {
+
+println("Введите математическую задачу(первое число, второе число, знак операции: ")
+var firstnumStr = ""
+var secondnumStr = ""
+var operation = ' '
+var isNum = true
+for (char in string.replace(" ", "")) {  //удаление всех пробелов
+if (char.isDigit() || char == '.') {
+if (isNum) {
+firstnumStr += char
+} else {
+secondnumStr += char
+}
+} else if (char in setOf('+', '-', '*', '/')) {
+operation = char
+isNum = false
+}
+}
+
+val num1 = firstnumStr.toFloat()
+val num2 = secondnumStr.toFloat()
+
+return when (operation) {
+'+' -> num1 + num2
+'-' -> num1 - num2
+'*' -> num1 * num2
+'/' -> num1 / num2
+else -> 0.0f
+}
+}
